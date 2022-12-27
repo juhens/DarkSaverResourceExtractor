@@ -4,7 +4,7 @@ namespace GrsExtractor
 {
     internal class Program
     {
-        private static string _baseLocate = AppDomain.CurrentDomain.BaseDirectory + "extract\\";
+        private static readonly string BasePath = AppDomain.CurrentDomain.BaseDirectory + "extract\\";
         private static string _fileName = string.Empty;
         private static int _fileSize;
         private static int _exportIndex;
@@ -93,8 +93,9 @@ namespace GrsExtractor
                 //mdrs21 예외, 첫번째일때 스프라이트 갯수 검사
                 if (!isFirst || spriteCount != 0)
                 {
-                    //이미지 크기가 0 이상인지
-                    if ((width > 0x0 && height > 0x0))
+                    //Mdsr129 예외
+                    //이미지 크기가 1 이상인지 
+                    if ((width > 0x1 && height > 0x1))
                     {
                         //오버플로우 검사
                         long pixelCount = (long)width * (long)height;
@@ -183,6 +184,8 @@ namespace GrsExtractor
 
         static void Main(string[] args)
         {
+            args = new string[1];
+            args[0] = "E:\\비주얼스튜디오\\DarkSaverServer\\GrsReader\\MAP\\Mdsr129.grs";
             if (args.Length == 0)
             {
                 Console.WriteLine("Argument가 없습니다.");
@@ -192,7 +195,7 @@ namespace GrsExtractor
 
 
             //extract 폴더 생성
-            DirectoryInfo directoryInfo = new(_baseLocate);
+            DirectoryInfo directoryInfo = new(BasePath);
             if (!directoryInfo.Exists)
                 directoryInfo.Create();
 
@@ -209,7 +212,7 @@ namespace GrsExtractor
                 _exportIndex = 0;
 
                 //_fileName 폴더 생성
-                string extractPath = _baseLocate + _fileName + "\\";
+                string extractPath = BasePath + _fileName + "\\";
                 directoryInfo = new(extractPath);
                 if (!directoryInfo.Exists)
                     directoryInfo.Create();
