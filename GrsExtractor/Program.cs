@@ -184,8 +184,8 @@ namespace GrsExtractor
 
         static void Main(string[] args)
         {
-            args = new string[1];
-            args[0] = "E:\\비주얼스튜디오\\DarkSaverServer\\GrsReader\\MAP\\Mdsr129.grs";
+            //args = new string[1];
+            //args[0] = "E:\\비주얼스튜디오\\DarkSaverServer\\GrsReader\\MAP\\Mdsr129.grs";
             if (args.Length == 0)
             {
                 Console.WriteLine("Argument가 없습니다.");
